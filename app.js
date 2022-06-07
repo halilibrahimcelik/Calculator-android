@@ -20,18 +20,12 @@ function numbers(e) {
     const number = e.target.innerText;
 
     numberDiv.innerHTML += `${number} `;
-    // console.log(numberDiv.innerHTML);
-    // console.dir(
-    //   e.target
-    //     .closest(".row")
-    //     .previousElementSibling.classList.contains("pointDiv")
-    // );
   }
 }
 
 function point(e) {
   if (
-    numberDiv.innerText.includes(".") ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "." ||
     numberDiv.innerText === "" ||
     numberDiv.outerText[numberDiv.outerText.length - 1] === ")" ||
     numberDiv.outerText[0] === "("
@@ -122,7 +116,7 @@ function operators(e) {
       }
 
       const total = numberDiv.innerText.replace(/\s/g, "");
-      const resultText = addbits(total).toString();
+      const resultText = correctTotal(total).toString();
 
       console.log(resultText);
 
@@ -170,7 +164,7 @@ function equalSign(e) {
       ) {
         alert("Please complete your operation");
       }
-      const resultText = addbits(total).toString();
+      const resultText = correctTotal(total).toString();
       const dividedResultText = resultText.split("").join(" ");
 
       console.log(typeof resultText);
@@ -199,12 +193,12 @@ function resetCalculation(e) {
   }
 }
 
-function addbits(s) {
+function correctTotal(str) {
   let total = 0;
-  s = s.match(/[+\-\*\/]*(\.\d+|\d+(\.\d+)?)/g) || [];
+  str = str.match(/[+\-\*\/]*(\.\d+|\d+(\.\d+)?)/g) || [];
 
-  while (s.length) {
-    const nv = s.shift();
+  while (str.length) {
+    const nv = str.shift();
     if (nv.startsWith("/")) {
       total /= parseFloat(nv.substring(1));
     } else if (nv.startsWith("*")) {
