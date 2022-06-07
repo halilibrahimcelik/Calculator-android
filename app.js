@@ -1,18 +1,20 @@
 //Capturing method
 const wrapperDiv = document.querySelector(".wrapper");
 const numberDiv = document.querySelector(".number");
-const secondNumberDiv = document.querySelector("#secondNumber");
-const operationDiv = document.querySelector("#operationDiv");
-const equal = document.querySelector("#equalDiv");
+const resultDiv = document.querySelector("#resultDiv");
 console.log(numberDiv);
 
 wrapperDiv.addEventListener("click", point);
 wrapperDiv.addEventListener("click", numbers);
 wrapperDiv.addEventListener("click", operators);
 wrapperDiv.addEventListener("click", equalSign);
+wrapperDiv.addEventListener("click", resetCalculation);
 
 function numbers(e) {
   if (e.target.classList.contains("numbers")) {
+    if (numberDiv.outerText[numberDiv.outerText.length - 1] === ")") {
+      return;
+    }
     const number = e.target.innerText;
     numberDiv.innerHTML += `${number} `;
     // console.log(numberDiv.innerHTML);
@@ -58,7 +60,6 @@ function operators(e) {
 
       console.log("plus");
       numberDiv.innerText = ` ${numberDiv.textContent} ${operator} `;
-      //   operationDiv.innerText = operator;
     } else if (operator === "-") {
       if (
         numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
@@ -75,11 +76,13 @@ function operators(e) {
       //   console.log(numberDiv.innerHTML.replace(/\s/g, ""));
       operator = "*";
       if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "("
       ) {
         return;
       }
@@ -88,11 +91,13 @@ function operators(e) {
     } else if (operator === "÷") {
       operator = "/";
       if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "("
       ) {
         return;
       }
@@ -100,11 +105,13 @@ function operators(e) {
       numberDiv.innerText = ` ${numberDiv.textContent}  ${operator} `;
     } else if (operator === "%") {
       if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "/"
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "("
       ) {
         console.log("patladık");
         return;
@@ -140,17 +147,53 @@ function operators(e) {
 
 function equalSign(e) {
   if (e.target.classList.contains("equal")) {
-    const str = numberDiv.innerText.replace(/\s/g, "");
+    const total = numberDiv.innerText.replace(/\s/g, "");
 
-    let countLeft = str.split("(").length - 1;
-    let countRight = str.split(")").length - 1;
+    let countLeft = total.split("(").length - 1;
+    let countRight = total.split(")").length - 1;
     let countTotal = countLeft + countRight;
     if (countTotal % 2 === 0) {
-      console.log(eval(numberDiv.innerText.replace(/\s/g, "")));
+      if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "/"
+      ) {
+        alert("Please complete your operation");
+      }
+      const resultText = addbits(total);
+
+      resultDiv.innerText = resultText;
     } else {
       alert("Please Close Parentheses");
     }
 
     // eval(numberDiv.value);
   }
+}
+
+function resetCalculation(e) {
+  if (e.target.classList.contains("operations")) {
+    let operator = e.target.innerText;
+    if (operator === "C") {
+      numberDiv.innerHTML = "";
+    }
+  }
+}
+
+function addbits(s) {
+  let total = 0;
+  s = s.match(/[+\-\*\/]*(\.\d+|\d+(\.\d+)?)/g) || [];
+
+  while (s.length) {
+    const nv = s.shift();
+    if (nv.startsWith("/")) {
+      total /= parseFloat(nv.substring(1));
+    } else if (nv.startsWith("*")) {
+      total *= parseFloat(nv.substring(1));
+    } else {
+      total += parseFloat(nv);
+    }
+  }
+  return total.toFixed(1);
 }
