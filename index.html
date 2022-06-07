@@ -27,12 +27,17 @@
       defer
     ></script>
     <link rel="stylesheet" href="style/style.css" />
+    <script src="app.js" defer></script>
   </head>
   <body>
     <section class="container pt-5">
       <h3 class="text-center text-danger pb-4">Android Calculator</h3>
       <div class="wrapper">
-        <div id="calculation-area"></div>
+        <article id="calculation-area" class="d-flex flex-column p-5">
+          <div class="number"></div>
+          <div class="" id="operationDiv"></div>
+          <div class="pointDiv" id="pointDiv"></div>
+        </article>
         <div class="row text-center align-self-end">
           <div class="col-12 d-flex">
             <div class="col-3 operations">C</div>
@@ -59,9 +64,9 @@
             <div class="col-3 operations">+</div>
           </div>
           <div class="col-12 d-flex">
-            <div class="col-3 numbers">+/-</div>
+            <div class="col-3 decrement">+/-</div>
             <div class="col-3 numbers">0</div>
-            <div class="col-3 numbers">.</div>
+            <div class="col-3 point">.</div>
             <div class="col-3 equal">=</div>
           </div>
         </div>

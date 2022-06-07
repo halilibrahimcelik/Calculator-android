@@ -4,9 +4,9 @@
 
 .wrapper{
     display: grid;
-    // grid-template-rows: 30% 70%;
+    grid-template-rows: 1fr 1fr;
     margin: 0 auto;
-    width: 60%;
+width: 20rem;
   min-height: 35rem;
   border: 1px solid #ccc;
 
@@ -23,6 +23,7 @@ padding: 1rem;
 }
 .calculation-area{
     background-color: #ccc;
+    white-space:none;
 
   
  
@@ -48,4 +49,17 @@ padding: 1rem;
 &:hover{
     background-color: rgb(238, 234, 234);
 }
+}
+.decrement{
+    &:hover{
+        background-color: rgb(238, 234, 234);
+    }
+}
+.point{
+    &:hover{
+        background-color: rgb(238, 234, 234);
+    }
+}
+.number{
+    letter-spacing: -1.9px;
 }
