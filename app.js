@@ -15,6 +15,7 @@ function numbers(e) {
   if (e.target.classList.contains("numbers")) {
     const number = e.target.innerText;
     numberDiv.innerHTML += `${number} `;
+    // console.log(numberDiv.innerHTML);
     // console.dir(
     //   e.target
     //     .closest(".row")
@@ -45,30 +46,71 @@ function operators(e) {
     if (operator === "+") {
       console.log(numberDiv.outerText);
       console.log(numberDiv.outerText[numberDiv.outerText.length - 1]);
-      if (numberDiv.outerText[numberDiv.outerText.length - 1] === operator) {
+      if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+      ) {
         return;
       }
-      if (numberDiv.outerText[numberDiv.outerText.length - 1] === "-") {
-        operator = "";
-      }
+
       console.log("plus");
       numberDiv.innerText = ` ${numberDiv.textContent} ${operator} `;
       //   operationDiv.innerText = operator;
     } else if (operator === "-") {
-      if (numberDiv.outerText[numberDiv.outerText.length - 1] === operator) {
+      if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+      ) {
         return;
       }
-      if (numberDiv.outerText[numberDiv.outerText.length - 1] === "-") {
-        operator = "";
-      }
-      console.log("minus");
-      numberDiv.innerText = ` ${numberDiv.textContent} ${operator} `;
 
-      //   operationDiv.innerText = operator;
+      numberDiv.innerText = ` ${numberDiv.textContent} ${operator} `;
     } else if (operator === "x") {
-      //   operationDiv.innerText = operator;
+      //   console.log(numberDiv.innerHTML.replace(/\s/g, ""));
+      operator = "*";
+      if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+      ) {
+        return;
+      }
+
+      numberDiv.innerText = ` ${numberDiv.textContent}  ${operator} `;
+    } else if (operator === "÷") {
+      operator = "/";
+      if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+      ) {
+        return;
+      }
+
+      numberDiv.innerText = ` ${numberDiv.textContent}  ${operator} `;
     } else if (operator === "%") {
-      //   operationDiv.innerText = operator;
+      if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "/"
+      ) {
+        console.log("patladık");
+        return;
+      }
+
+      numberDiv.innerText = ` ${numberDiv.textContent} *  ${1 / 100} `;
     } else if (operator === "()") {
       if (!Parentheses) {
         numberDiv.textContent = `( ${numberDiv.textContent} `;
@@ -78,6 +120,15 @@ function operators(e) {
         }
         Parentheses = true;
       } else {
+        if (
+          numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+          numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+          numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
+          numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
+          numberDiv.outerText[numberDiv.outerText.length - 1] === "/"
+        ) {
+          return;
+        }
         numberDiv.textContent = `${numberDiv.textContent} )`;
         Parentheses = false;
       }
@@ -89,9 +140,17 @@ function operators(e) {
 
 function equalSign(e) {
   if (e.target.classList.contains("equal")) {
-    {
-      console.log(eval(numberDiv.innerText.trim()));
-      // eval(numberDiv.value);
+    const str = numberDiv.innerText.replace(/\s/g, "");
+
+    let countLeft = str.split("(").length - 1;
+    let countRight = str.split(")").length - 1;
+    let countTotal = countLeft + countRight;
+    if (countTotal % 2 === 0) {
+      console.log(eval(numberDiv.innerText.replace(/\s/g, "")));
+    } else {
+      alert("Please Close Parentheses");
     }
+
+    // eval(numberDiv.value);
   }
 }
