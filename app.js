@@ -51,7 +51,8 @@ function operators(e) {
         numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
       ) {
         return;
       }
@@ -64,7 +65,8 @@ function operators(e) {
         numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
       ) {
         return;
       }
@@ -80,7 +82,8 @@ function operators(e) {
         numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "("
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
       ) {
         return;
       }
@@ -95,7 +98,8 @@ function operators(e) {
         numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "("
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
       ) {
         return;
       }
@@ -109,7 +113,8 @@ function operators(e) {
         numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
         numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "("
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
       ) {
         console.log("patladık");
         return;
