@@ -131,7 +131,6 @@ function operators(e) {
         numberDiv.textContent = `( ${numberDiv.textContent} `;
         console.log(operator);
         if (numberDiv.outerText[numberDiv.outerText.length - 1] === operator) {
-          console.log("lala");
         }
         Parentheses = true;
       } else {
