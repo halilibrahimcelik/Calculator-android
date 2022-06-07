@@ -2,11 +2,16 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .wrapper {
   display: grid;
   grid-template-rows: 1fr 1fr;
   margin: 0 auto;
-  width: 20rem;
+  max-width: 35rem;
   min-height: 35rem;
   border: 1px solid #ccc;
 }

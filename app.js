@@ -1,6 +1,7 @@
 //Capturing method
 const wrapperDiv = document.querySelector(".wrapper");
 const numberDiv = document.querySelector(".number");
+const prevNumber = document.querySelector(".prevNumber");
 const resultDiv = document.querySelector("#resultDiv");
 console.log(numberDiv);
 
@@ -9,6 +10,7 @@ wrapperDiv.addEventListener("click", numbers);
 wrapperDiv.addEventListener("click", operators);
 wrapperDiv.addEventListener("click", equalSign);
 wrapperDiv.addEventListener("click", resetCalculation);
+wrapperDiv.addEventListener("click", decrement);
 
 function numbers(e) {
   if (e.target.classList.contains("numbers")) {
@@ -16,6 +18,7 @@ function numbers(e) {
       return;
     }
     const number = e.target.innerText;
+
     numberDiv.innerHTML += `${number} `;
     // console.log(numberDiv.innerHTML);
     // console.dir(
@@ -37,6 +40,7 @@ function point(e) {
   }
   if (e.target.classList.contains("point")) {
     const point = e.target.innerText;
+
     numberDiv.innerText += ` ${point} `;
   }
 }
@@ -117,7 +121,12 @@ function operators(e) {
         return;
       }
 
-      numberDiv.innerText = ` ${numberDiv.textContent} *  ${1 / 100} `;
+      const total = numberDiv.innerText.replace(/\s/g, "");
+      const resultText = addbits(total).toString();
+
+      console.log(resultText);
+
+      numberDiv.innerText = resultText * (1 / 100);
     } else if (operator === "()") {
       if (!Parentheses) {
         numberDiv.textContent = `( ${numberDiv.textContent} `;
@@ -161,9 +170,17 @@ function equalSign(e) {
       ) {
         alert("Please complete your operation");
       }
-      const resultText = addbits(total);
+      const resultText = addbits(total).toString();
+      const dividedResultText = resultText.split("").join(" ");
 
-      resultDiv.innerText = resultText;
+      console.log(typeof resultText);
+
+      resultDiv.innerHTML = `
+      <br/>
+      Current Result : ${dividedResultText} `;
+
+      //   prevNumber.innerHTML = `Previous Result: ${dividedResultText} `;
+      numberDiv.innerHTML = "";
     } else {
       alert("Please Close Parentheses");
     }
@@ -177,6 +194,7 @@ function resetCalculation(e) {
     let operator = e.target.innerText;
     if (operator === "C") {
       numberDiv.innerHTML = "";
+      resultDiv.innerHTML = "";
     }
   }
 }
@@ -195,5 +213,20 @@ function addbits(s) {
       total += parseFloat(nv);
     }
   }
-  return total.toFixed(1);
+  return total;
+}
+
+function decrement(e) {
+  if (e.target.classList.contains("decrement")) {
+    let operator = e.target.innerText;
+    // operator = "-";
+
+    console.log(numberDiv.outerText[0]);
+    if (numberDiv.outerText[0] === "-" || numberDiv.outerText[0] === "(") {
+      return;
+    }
+    if (operator === "+/-") {
+      numberDiv.textContent = ` -${numberDiv.textContent}`;
+    }
+  }
 }
