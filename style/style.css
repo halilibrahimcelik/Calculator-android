@@ -1,0 +1,44 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+  display: grid;
+  margin: 0 auto;
+  width: 60%;
+  min-height: 35rem;
+  border: 1px solid #ccc;
+}
+
+.col-3 {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.calculation-area {
+  background-color: #ccc;
+}
+
+.operations {
+  background-color: rgb(236, 250, 255);
+  color: dodgerblue;
+}
+.operations:hover {
+  background-color: rgb(160, 218, 237);
+}
+
+.equal {
+  background-color: rgb(75, 255, 75);
+  color: white;
+}
+.equal:hover {
+  background-color: rgb(65, 186, 65);
+}
+
+.numbers:hover {
+  background-color: rgb(238, 234, 234);
+}
+
+/*# sourceMappingURL=style.css.map */
