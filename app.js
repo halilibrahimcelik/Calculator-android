@@ -15,9 +15,8 @@ wrapperDiv.addEventListener("click", decrement);
 let isClicked = false;
 let pointDone = false;
 function conditionality(oper) {
-  // oper = "%";
   if (
-    // numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
     numberDiv.outerText[numberDiv.outerText.length - 1] === oper ||
     numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
     numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
@@ -44,23 +43,51 @@ function numbers(e) {
 }
 
 function point(e) {
-  if (
-    numberDiv.outerText[numberDiv.outerText.length - 1] === "." ||
-    numberDiv.innerText === "" ||
-    numberDiv.outerText[numberDiv.outerText.length - 1] === ")" ||
-    numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
-    numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
-    numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-    numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
-    numberDiv.outerText[0] === "("
-  ) {
-    return;
-  }
+  let numbers = "1234567890";
+  console.log();
   if (e.target.classList.contains("point")) {
     const point = e.target.innerText;
 
-    numberDiv.innerText += ` ${point} `;
+    if (numberDiv.outerText === "") {
+      numberDiv.innerText += ` 0${point}`;
+
+      if (numberDiv.outerText[numberDiv.outerText.length - 1] === ".") {
+        return;
+      }
+    } else if (numberDiv.outerText) {
+      if (
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "." ||
+        numberDiv.outerText[numberDiv.outerText.length - 2] === "." ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === ")" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
+        numberDiv.outerText[numberDiv.outerText.length - 1] === "%"
+      ) {
+        return;
+      }
+      numberDiv.innerText += ` ${point}`;
+    }
+
+    console.log(numberDiv.outerText);
   }
+  // if (
+  //   numberDiv.outerText[numberDiv.outerText.length - 1] === "." ||
+  //   numberDiv.innerText === "" ||
+  //   numberDiv.outerText[numberDiv.outerText.length - 1] === ")" ||
+  //   numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+  //   numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+  //   numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
+  //   numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
+  //   numberDiv.outerText[0] === "("
+  // ) {
+  //   return;
+  // }
+  // if (e.target.classList.contains("point")) {
+  //   const point = e.target.innerText;
+
+  //   numberDiv.innerText += ` ${point} `;
+  // }
 }
 
 let Parentheses = false;
