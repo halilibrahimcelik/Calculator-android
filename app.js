@@ -12,6 +12,26 @@ wrapperDiv.addEventListener("click", equalSign);
 wrapperDiv.addEventListener("click", resetCalculation);
 wrapperDiv.addEventListener("click", decrement);
 
+let isClicked = false;
+let pointDone = false;
+function conditionality(oper) {
+  // oper = "%";
+  if (
+    // numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === oper ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "." ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "/"
+  ) {
+    isClicked = true;
+  }
+  return isClicked;
+}
+
 function numbers(e) {
   if (e.target.classList.contains("numbers")) {
     if (numberDiv.outerText[numberDiv.outerText.length - 1] === ")") {
@@ -28,6 +48,10 @@ function point(e) {
     numberDiv.outerText[numberDiv.outerText.length - 1] === "." ||
     numberDiv.innerText === "" ||
     numberDiv.outerText[numberDiv.outerText.length - 1] === ")" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
+    numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
     numberDiv.outerText[0] === "("
   ) {
     return;
@@ -46,79 +70,49 @@ function operators(e) {
     if (operator === "+") {
       console.log(numberDiv.outerText);
       console.log(numberDiv.outerText[numberDiv.outerText.length - 1]);
-      if (
-        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
-      ) {
+
+      isClicked = false;
+      const canbeDone = conditionality("+");
+      if (canbeDone) {
+        console.log("patladık2");
         return;
       }
 
       console.log("plus");
       numberDiv.innerText = ` ${numberDiv.textContent} ${operator} `;
     } else if (operator === "-") {
-      if (
-        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
-      ) {
+      isClicked = false;
+      const canbeDone = conditionality("-");
+      if (canbeDone) {
+        console.log("patladık2");
         return;
       }
 
       numberDiv.innerText = ` ${numberDiv.textContent} ${operator} `;
     } else if (operator === "x") {
-      //   console.log(numberDiv.innerHTML.replace(/\s/g, ""));
       operator = "*";
-      if (
-        numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
-      ) {
+
+      isClicked = false;
+      const canbeDone = conditionality("*");
+      if (canbeDone) {
+        console.log("patladık2");
         return;
       }
 
       numberDiv.innerText = ` ${numberDiv.textContent}  ${operator} `;
     } else if (operator === "÷") {
       operator = "/";
-      if (
-        numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "%" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
-      ) {
+
+      isClicked = false;
+      const canbeDone = conditionality("/");
+      if (canbeDone) {
+        console.log("patladık2");
         return;
       }
 
       numberDiv.innerText = ` ${numberDiv.textContent}  ${operator} `;
     } else if (operator === "%") {
-      if (
-        numberDiv.outerText[numberDiv.outerText.length - 1] === undefined ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === operator ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "-" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "+" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "*" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "/" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "(" ||
-        numberDiv.outerText[numberDiv.outerText.length - 1] === "."
-      ) {
-        console.log("patladık");
-        return;
-      }
+      conditionality(operator);
 
       const total = numberDiv.innerText.replace(/\s/g, "");
       const resultText = correctTotal(total).toString();
@@ -169,7 +163,7 @@ function equalSign(e) {
         alert("Please complete your operation");
       }
       const resultText = correctTotal(total).toString();
-      const dividedResultText = resultText.split("").join(" ");
+      const dividedResultText = resultText.split("").join("");
 
       console.log(typeof resultText);
 
@@ -177,13 +171,10 @@ function equalSign(e) {
       <br/>
       Current Result : ${dividedResultText} `;
 
-      //   prevNumber.innerHTML = `Previous Result: ${dividedResultText} `;
       numberDiv.innerHTML = "";
     } else {
       alert("Please Close Parentheses");
     }
-
-    // eval(numberDiv.value);
   }
 }
 
@@ -197,6 +188,7 @@ function resetCalculation(e) {
   }
 }
 
+//Total sum of Calculation
 function correctTotal(str) {
   let total = 0;
   str = str.match(/[+\-\*\/]*(\.\d+|\d+(\.\d+)?)/g) || [];
