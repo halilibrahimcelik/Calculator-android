@@ -2,8 +2,4 @@
 
  [Website link](https://halilibrahimcelik.github.io/Calculator-android/).
 
-
-In this project I structure my project via React Components.
- My main goal is to transfer data between components by using React Hooks.
-
-Information is locally stored in the browser API.
+The goal is to make a functional and visual clone of the calculator of an android device. 
